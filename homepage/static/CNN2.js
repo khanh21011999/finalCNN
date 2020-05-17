@@ -6,17 +6,17 @@ const customBtn = document.getElementById("custom-button");
 const customTxt = document.getElementById("custom-text");
 
 customBtn.addEventListener("click", function() {
-  inpFile.click();
+  	inpFile.click();
 });
 
 inpFile.addEventListener("change", function() {
-  if (inpFile.value) {
-    customTxt.innerHTML = inpFile.value.match(
-      /[\/\\]([\w\d\s\.\-\(\)]+)$/
-    )[1];
-  } else {
-    customTxt.innerHTML = "No file chosen, yet.";
-  }
+	if (inpFile.value) {
+		customTxt.innerHTML = inpFile.value.match(
+		/[\/\\]([\w\d\s\.\-\(\)]+)$/
+		)[1];
+	} else {
+		customTxt.innerHTML = "No file chosen, yet.";
+	}
 });
 
 inpFile.addEventListener("change", function() {
