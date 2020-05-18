@@ -6,13 +6,13 @@ import cv2
 
 from PIL import Image
 
-CATEGORIES=['CARS','CATS','DOGS','FLOWER','HUMANS','MOTOBIKES']
+CATEGORIES=['Cars','Cats','Dogs','Flower','Human','Motorbikes']
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('CNN2.html')
+    return render_template('new_cnn.html')
 
 @app.route('/classify', methods=['POST'])
 def predict():
@@ -33,8 +33,12 @@ def predict():
         predict = model.predict(image)
         predict_class = CATEGORIES[np.argmax(predict)]
 
-        message = predict_class
-        print("Success: ", predict_class)
+        if (predict_class == 'Human'):
+            message = 'Congrats, you are one of us! \n Click somewhere to proceed...'
+        else:
+            message = 'Ehh you are one of the ' + predict_class + '. ' + predict_class + ' are not allowed here...' 
+
+        print(predict_class)
 
     except Exception as e:
         #Store error to pass to the web page
