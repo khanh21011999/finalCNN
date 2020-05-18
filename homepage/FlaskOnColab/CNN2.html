@@ -52,7 +52,8 @@
         			<img id="image-preview__image" src="" alt="Image Preview" class="image-preview__image">
         			<span class="image-preview__default-text"> Image Preview</span>
       			</div>
-      			<form action="http://3085f300.ngrok.io/predict" method="POST" enctype="multipart/form-data" name="imgForm" id="imgForm">
+
+      			<form action="" method="POST" enctype="multipart/form-data" name="imgForm" id="imgForm">
       				<input type="file" name="inpFile" id="inpFile" hidden="hidden">
       				<input type="submit" name="submit" id="submit">
       			</form>
@@ -68,6 +69,37 @@
   <p>@Copyright ...</p>
 </div>
 
+<script>
+  $(document).ready(function(){
 
+    inpFile.addEventListener("change", function() {
+  		document.getElementById("res").innerHTML="";
+	});
+
+    $("#imgForm").on('submit', function(e){
+      e.preventDefault();
+      
+      $.ajax({
+        type: "POST",
+        url: "http://536b0cff.ngrok.io/predict",	//can thay doi url
+        data: new FormData(this),
+        cache:false,
+        contentType:false,  
+        processData:false,
+        success: function(data){
+          $.each(data, function(i, element){
+            $("#res").append(element);
+            console.log(element);
+          });
+        },
+        error: function(data){
+          $("#res").text("Error");
+          console.log(element);
+        }
+      });
+      
+    });  
+  });
+</script>
 <script src="CNN2.js"></script>
 </body>
